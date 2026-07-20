@@ -1,47 +1,47 @@
 interface Props {
-    id: string;
-  }
-  
-  export default function MissionHeader({ id }: Props) {
-    return (
-      <div className="rounded-2xl border border-yellow-500/40 bg-gradient-to-r from-yellow-500/10 to-slate-900 p-8">
-  
-        <div className="flex items-center justify-between">
-  
-          <div>
-  
-            <div className="mb-3 inline-flex rounded-full bg-yellow-500 px-3 py-1 text-xs font-semibold text-black">
-              MISSION AT RISK
-            </div>
-  
-            <h1 className="text-4xl font-bold">
-              {id} - Medical Relief
-            </h1>
-  
-            <p className="mt-2 text-slate-300">
-              Wilson → Lokichoggio
-            </p>
-  
-            <p className="mt-4 text-slate-400">
-              Aircraft: <strong>5Y-ABC</strong> • ETD: <strong>08:30 UTC</strong>
-            </p>
-  
-          </div>
-  
-          <div className="text-right">
-  
-            <p className="text-slate-400">
-              Mission Readiness
-            </p>
-  
-            <h2 className="text-6xl font-bold text-cyan-400">
-              84%
-            </h2>
-  
-          </div>
-  
+  missionId: string;
+}
+
+export default function MissionHeader({ missionId }: Props) {
+  return (
+    <div className="rounded-2xl border border-slate-800 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 p-8 shadow-lg">
+
+      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+
+        <div>
+
+          <p className="text-sm font-medium uppercase tracking-[0.3em] text-cyan-400">
+            Mission Workspace
+          </p>
+
+          <h1 className="mt-2 text-5xl font-bold">
+            {missionId}
+          </h1>
+
+          <p className="mt-3 text-slate-400">
+            Live operational readiness dashboard
+          </p>
+
         </div>
-  
+
+        <div className="text-left md:text-right">
+
+          <p className="text-sm uppercase tracking-widest text-slate-400">
+            Aircraft
+          </p>
+
+          <h2 className="mt-2 text-3xl font-semibold">
+            5Y-ABC
+          </h2>
+
+          <p className="mt-2 text-green-400">
+            ● Connected
+          </p>
+
+        </div>
+
       </div>
-    );
-  }
+
+    </div>
+  );
+}

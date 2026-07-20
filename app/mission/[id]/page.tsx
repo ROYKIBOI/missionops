@@ -1,8 +1,11 @@
 import AppShell from "@/components/layout/AppShell";
+
 import MissionHeader from "@/components/mission/MissionHeader";
+import MissionStatus from "@/components/mission/MissionStatus";
+import MissionBrief from "@/components/mission/MissionBrief";
+import NextAction from "@/components/mission/NextAction";
 import MissionDrivers from "@/components/mission/MissionDrivers";
 import MissionTimeline from "@/components/mission/MissionTimeline";
-import MissionBrief from "@/components/mission/MissionBrief";
 
 interface Props {
   params: Promise<{
@@ -15,20 +18,31 @@ export default async function MissionPage({ params }: Props) {
 
   return (
     <AppShell>
-      <MissionHeader id={id} />
 
+      {/* Mission Header */}
+      <MissionHeader missionId={id} />
+
+      {/* Executive Summary */}
+      <div className="mt-8 grid gap-6 lg:grid-cols-3">
+
+        <MissionStatus />
+
+        <MissionBrief />
+
+        <NextAction />
+
+      </div>
+
+      {/* Readiness Drivers */}
       <div className="mt-8">
         <MissionDrivers />
       </div>
-      <MissionHeader id={id} />
 
-<div className="mt-6">
-  <MissionBrief />
-</div>
-
+      {/* Timeline */}
       <div className="mt-8">
         <MissionTimeline />
       </div>
+
     </AppShell>
   );
 }
