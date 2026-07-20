@@ -1,6 +1,6 @@
 "use client";
 
-import { ReadinessDriver } from "@/types/mission";
+import type { ReadinessDriver } from "@/types/mission";
 
 interface Props {
   driver: ReadinessDriver;
@@ -23,9 +23,7 @@ export default function MissionDriverCard({
       onClick={() => onSelect(driver)}
       className={`w-full rounded-xl border ${colour} bg-slate-900 p-5 text-left transition-all duration-300 hover:scale-[1.02] hover:bg-slate-800`}
     >
-      <h3 className="text-lg font-semibold">
-        {driver.title}
-      </h3>
+      <h3 className="text-lg font-semibold">{driver.title}</h3>
 
       <p className="mt-2 text-sm text-slate-400">
         {driver.owner}

@@ -1,41 +1,19 @@
-import { blockers } from "@/mock/missionDrivers";
-import { ReadinessDriver } from "@/types/mission";
+import { missionDrivers } from "@/mock/missionDrivers";
 
-export interface DependencyResult {
-  rootCause: ReadinessDriver;
-  chain: ReadinessDriver[];
-}
+export function resolveDependencyChain(driverId: string) {
+  const chain: string[] = [];
 
-export function resolveDependency(
-  driverId: string
-): DependencyResult {
-
-  const chain: ReadinessDriver[] = [];
-
-  let current = blockers.find(
-    b => b.id === driverId
+  let current = missionDrivers.find(
+    (driver) => driver.id === driverId
   );
 
-  while(current){
+  while (current?.dependsOn) {
+    chain.push(current.dependsOn);
 
-    chain.unshift(current);
-
-    if(!current.dependsOn){
-      break;
-    }
-
-    current = blockers.find(
-      b => b.id === current.dependsOn
+    current = missionDrivers.find(
+      (driver) => driver.id === current?.dependsOn
     );
-
   }
 
-  return{
-
-    rootCause: chain[0],
-
-    chain
-
-  };
-
+  return chain;
 }

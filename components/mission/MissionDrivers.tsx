@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { missionDrivers } from "@/mock/missionDrivers";
-import { ReadinessDriver } from "@/types/mission";
+import type { ReadinessDriver } from "@/types/mission";
 
 import MissionDriverCard from "./MissionDriverCard";
 import MissionDetailPanel from "./MissionDetailPanel";
