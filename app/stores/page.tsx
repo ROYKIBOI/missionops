@@ -1,17 +1,30 @@
 import AppShell from "@/components/layout/AppShell";
 
+import StoresHeader from "@/components/stores/StoresHeader";
+import StoresKPIs from "@/components/stores/StoresKPIs";
+import StoresRequests from "@/components/stores/StoresRequests";
+import StoresDetailPanel from "@/components/stores/StoresDetailPanel";
+
 export default function StoresPage() {
   return (
     <AppShell>
-      <div className="rounded-2xl border border-slate-800 bg-slate-900 p-8">
-        <h1 className="text-3xl font-bold text-white">
-          Stores
-        </h1>
 
-        <p className="mt-4 text-slate-400">
-          Stores workspace coming in Sprint 4.
-        </p>
+      <StoresHeader />
+
+      <div className="mt-8">
+        <StoresKPIs />
       </div>
+
+      <div className="mt-8 grid gap-6 lg:grid-cols-3">
+
+        <div className="lg:col-span-2">
+          <StoresRequests />
+        </div>
+
+        <StoresDetailPanel />
+
+      </div>
+
     </AppShell>
   );
 }

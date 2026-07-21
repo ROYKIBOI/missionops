@@ -1,6 +1,7 @@
 import AppShell from "@/components/layout/AppShell";
 
 import MissionHeader from "@/components/mission/MissionHeader";
+import MissionKPIs from "@/components/mission/MissionKPIs";
 import MissionStatus from "@/components/mission/MissionStatus";
 import MissionBrief from "@/components/mission/MissionBrief";
 import NextAction from "@/components/mission/NextAction";
@@ -18,19 +19,21 @@ export default async function MissionPage({ params }: Props) {
 
   return (
     <AppShell>
-
       {/* Mission Header */}
       <MissionHeader missionId={id} />
 
+      {/* KPI Cards */}
+      <div className="mt-8">
+        <MissionKPIs />
+      </div>
+
       {/* Executive Summary */}
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
-
         <MissionStatus />
 
         <MissionBrief />
 
         <NextAction />
-
       </div>
 
       {/* Readiness Drivers */}
@@ -42,7 +45,6 @@ export default async function MissionPage({ params }: Props) {
       <div className="mt-8">
         <MissionTimeline />
       </div>
-
     </AppShell>
   );
 }
