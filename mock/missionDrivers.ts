@@ -13,6 +13,25 @@ export const missionDrivers: ReadinessDriver[] = [
     missionImpact: "Aircraft cannot be released.",
   },
   {
+  id: "CRS",
+
+  title: "Aircraft Release",
+
+  owner: "Engineering",
+
+  status: "BLOCKED",
+
+  readinessWeight: 20,
+
+  dependsOn: "HF",
+
+  eta: 5,
+
+  nextAction: "Issue Certificate of Release to Service",
+
+  missionImpact: "Mission cannot depart until aircraft is released.",
+},
+  {
     id: "CONNECTOR",
     title: "HF Connector",
     owner: "Stores",

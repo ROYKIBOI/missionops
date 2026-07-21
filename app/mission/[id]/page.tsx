@@ -5,6 +5,7 @@ import MissionKPIs from "@/components/mission/MissionKPIs";
 import MissionStatus from "@/components/mission/MissionStatus";
 import MissionBrief from "@/components/mission/MissionBrief";
 import NextAction from "@/components/mission/NextAction";
+import MissionChain from "@/components/mission/MissionChain";
 import MissionDrivers from "@/components/mission/MissionDrivers";
 import MissionTimeline from "@/components/mission/MissionTimeline";
 
@@ -22,7 +23,7 @@ export default async function MissionPage({ params }: Props) {
       {/* Mission Header */}
       <MissionHeader missionId={id} />
 
-      {/* KPI Cards */}
+      {/* Mission KPIs */}
       <div className="mt-8">
         <MissionKPIs />
       </div>
@@ -36,12 +37,17 @@ export default async function MissionPage({ params }: Props) {
         <NextAction />
       </div>
 
-      {/* Readiness Drivers */}
+      {/* Mission Dependency Chain */}
+      <div className="mt-8">
+        <MissionChain />
+      </div>
+
+      {/* Mission Readiness Drivers */}
       <div className="mt-8">
         <MissionDrivers />
       </div>
 
-      {/* Timeline */}
+      {/* Mission Timeline */}
       <div className="mt-8">
         <MissionTimeline />
       </div>

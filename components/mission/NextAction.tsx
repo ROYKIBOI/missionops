@@ -1,9 +1,12 @@
-import { missionDrivers } from "@/mock/missionDrivers";
+import {
+  getCriticalBlocker,
+  getMissionETA,
+  getMissionOwner,
+  getNextAction,
+} from "@/lib/missionEngine";
 
 export default function NextAction() {
-  const next = missionDrivers.find(
-    (driver) => driver.status !== "COMPLETE"
-  );
+  const blocker = getCriticalBlocker();
 
   return (
     <div className="rounded-2xl border border-amber-500 bg-slate-900 p-6 shadow-lg">
@@ -20,10 +23,10 @@ export default function NextAction() {
 
       </div>
 
-      {next ? (
+      {blocker ? (
         <>
           <p className="mt-6 text-lg font-semibold text-white">
-            {next.nextAction}
+            {getNextAction()}
           </p>
 
           <div className="mt-6 space-y-5">
@@ -32,21 +35,40 @@ export default function NextAction() {
               <p className="text-xs uppercase tracking-widest text-slate-500">
                 Driver
               </p>
-              <p className="mt-1">{next.title}</p>
+
+              <p className="mt-1">
+                {blocker.title}
+              </p>
             </div>
 
             <div>
               <p className="text-xs uppercase tracking-widest text-slate-500">
                 Responsible Team
               </p>
-              <p className="mt-1">{next.owner}</p>
+
+              <p className="mt-1">
+                {getMissionOwner()}
+              </p>
             </div>
 
             <div>
               <p className="text-xs uppercase tracking-widest text-slate-500">
                 Estimated Completion
               </p>
-              <p className="mt-1">{next.eta} minutes</p>
+
+              <p className="mt-1">
+                {getMissionETA()} minutes
+              </p>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase tracking-widest text-slate-500">
+                Mission Impact
+              </p>
+
+              <p className="mt-1 text-red-300">
+                {blocker.missionImpact}
+              </p>
             </div>
 
           </div>
@@ -59,11 +81,12 @@ export default function NextAction() {
           </p>
 
           <p className="mt-2 text-slate-300">
-            No outstanding readiness drivers remain.
+            All readiness drivers are complete. Aircraft may be released.
           </p>
 
         </div>
       )}
+
     </div>
   );
 }

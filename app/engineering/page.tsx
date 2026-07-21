@@ -1,34 +1,24 @@
 import AppShell from "@/components/layout/AppShell";
-
-import EngineeringHeader from "@/components/engineering/EngineeringHeader";
-import EngineeringKPIs from "@/components/engineering/EngineeringKPIs";
-import EngineeringPriority from "@/components/engineering/EngineeringPriority";
-import EngineeringTasks from "@/components/engineering/EngineeringTasks";
-import EngineeringDependencyFlow from "@/components/engineering/EngineeringDependencyFlow";
+import EngineeringWorkspace from "@/components/engineering/EngineeringWorkspace";
 
 export default function EngineeringPage() {
   return (
     <AppShell>
 
-      <EngineeringHeader />
+      <div className="mb-8">
 
-      <div className="mt-8">
-        <EngineeringKPIs />
-      </div>
+        <h1 className="text-4xl font-bold">
+          Engineering Workspace
+        </h1>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
-
-        <div className="lg:col-span-2">
-          <EngineeringTasks />
-        </div>
-
-        <EngineeringPriority />
+        <p className="mt-3 text-slate-400">
+          Engineering owns the technical readiness of the aircraft.
+          Completing tasks here contributes directly to mission readiness.
+        </p>
 
       </div>
 
-      <div className="mt-8">
-        <EngineeringDependencyFlow />
-      </div>
+      <EngineeringWorkspace />
 
     </AppShell>
   );

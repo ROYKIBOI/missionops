@@ -1,32 +1,31 @@
-import { missionDrivers } from "@/mock/missionDrivers";
-import { calculateMissionReadiness } from "@/lib/engines/readiness";
+import { mission } from "@/lib/mission";
+import { getMissionBlockers } from "@/lib/missionEngine";
 
 export default function MissionKPIs() {
-  const readiness = calculateMissionReadiness();
-
-  const activeBlockers = missionDrivers.filter(
-    (driver) => driver.status !== "COMPLETE"
-  ).length;
+  const blockers = getMissionBlockers();
 
   const cards = [
     {
       title: "Mission Readiness",
-      value: `${readiness.score}%`,
+      value: `${mission.readiness.score}%`,
       colour: "text-cyan-400",
     },
     {
       title: "Aircraft",
-      value: "5Y-FAJ",
+      value: mission.aircraft,
       colour: "text-white",
     },
     {
       title: "Active Drivers",
-      value: activeBlockers,
-      colour: activeBlockers ? "text-red-400" : "text-green-400",
+      value: blockers.length,
+      colour:
+        blockers.length > 0
+          ? "text-red-400"
+          : "text-green-400",
     },
     {
       title: "Estimated Release",
-      value: "11:40",
+      value: mission.scheduledDeparture,
       colour: "text-yellow-400",
     },
   ];

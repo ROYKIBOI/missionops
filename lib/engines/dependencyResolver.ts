@@ -1,19 +1,20 @@
-import { missionDrivers } from "@/mock/missionDrivers";
+import { mission } from "@/lib/mission";
 
-export function resolveDependencyChain(driverId: string) {
-  const chain: string[] = [];
+export function resolveDependencies() {
+  mission.drivers.forEach((driver) => {
+    if (!driver.dependsOn) return;
 
-  let current = missionDrivers.find(
-    (driver) => driver.id === driverId
-  );
-
-  while (current?.dependsOn) {
-    chain.push(current.dependsOn);
-
-    current = missionDrivers.find(
-      (driver) => driver.id === current?.dependsOn
+    const dependency = mission.drivers.find(
+      (d) => d.id === driver.dependsOn
     );
-  }
 
-  return chain;
+    if (!dependency) return;
+
+    if (
+      dependency.status === "COMPLETE" &&
+      driver.status === "BLOCKED"
+    ) {
+      driver.status = "NOT_STARTED";
+    }
+  });
 }
