@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 
 import type { ReadinessDriver } from "@/types/mission";
-
 import { completeDriver } from "@/lib/actions/missionActions";
 
 import CompleteTaskButton from "./CompleteTaskButton";
@@ -15,7 +14,6 @@ interface Props {
 export default function EngineeringDetailPanel({
   driver,
 }: Props) {
-
   const [status, setStatus] = useState(driver?.status);
 
   useEffect(() => {
@@ -37,6 +35,8 @@ export default function EngineeringDetailPanel({
   }
 
   function handleComplete() {
+    // TypeScript safety check
+    if (!driver) return;
 
     completeDriver(driver.id);
 
@@ -58,7 +58,9 @@ export default function EngineeringDetailPanel({
               ? "bg-green-600"
               : status === "IN_PROGRESS"
               ? "bg-yellow-600"
-              : "bg-red-600"
+              : status === "BLOCKED"
+              ? "bg-red-600"
+              : "bg-slate-700"
           }`}
         >
           {status}
@@ -69,43 +71,35 @@ export default function EngineeringDetailPanel({
       <div className="mt-8 space-y-5">
 
         <div>
-
           <p className="text-sm text-slate-400">
             Mission Impact
           </p>
 
           <p>{driver.missionImpact}</p>
-
         </div>
 
         <div>
-
           <p className="text-sm text-slate-400">
             Dependency
           </p>
 
           <p>{driver.dependsOn ?? "None"}</p>
-
         </div>
 
         <div>
-
           <p className="text-sm text-slate-400">
             Required Action
           </p>
 
           <p>{driver.nextAction}</p>
-
         </div>
 
         <div>
-
           <p className="text-sm text-slate-400">
             ETA
           </p>
 
           <p>{driver.eta} minutes</p>
-
         </div>
 
         {status !== "COMPLETE" && (
