@@ -4,26 +4,32 @@ import type { ReadinessDriver } from "@/types/mission";
 
 interface Props {
   driver: ReadinessDriver | null;
+  onIssuePart: () => void;
 }
 
 export default function StoresDetailPanel({
   driver,
+  onIssuePart,
 }: Props) {
+
   if (!driver) {
     return (
       <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+
         <h2 className="text-2xl font-bold">
           Stores Task
         </h2>
 
         <p className="mt-4 text-slate-400">
-          Select a stores request to view its details.
+          Select a stores request.
         </p>
+
       </div>
     );
   }
 
   return (
+
     <div className="rounded-2xl border border-cyan-500 bg-slate-900 p-6">
 
       <div className="flex items-center justify-between">
@@ -51,6 +57,7 @@ export default function StoresDetailPanel({
       <div className="mt-8 space-y-6">
 
         <div>
+
           <p className="text-sm text-slate-400">
             Mission Impact
           </p>
@@ -58,9 +65,11 @@ export default function StoresDetailPanel({
           <p className="mt-1">
             {driver.missionImpact}
           </p>
+
         </div>
 
         <div>
+
           <p className="text-sm text-slate-400">
             Required Action
           </p>
@@ -68,9 +77,11 @@ export default function StoresDetailPanel({
           <p className="mt-1">
             {driver.nextAction}
           </p>
+
         </div>
 
         <div>
+
           <p className="text-sm text-slate-400">
             Estimated Time
           </p>
@@ -78,16 +89,32 @@ export default function StoresDetailPanel({
           <p className="mt-1">
             {driver.eta} minutes
           </p>
+
         </div>
 
-        <button
-          className="rounded-xl bg-cyan-600 px-5 py-3 font-semibold transition hover:bg-cyan-500"
-        >
-          Issue Part
-        </button>
+        {driver.status !== "COMPLETE" ? (
+
+          <button
+            onClick={onIssuePart}
+            className="rounded-xl bg-cyan-600 px-5 py-3 font-semibold transition hover:bg-cyan-500"
+          >
+            Issue Part
+          </button>
+
+        ) : (
+
+          <button
+            disabled
+            className="rounded-xl bg-green-700 px-5 py-3 font-semibold"
+          >
+            Part Issued ✓
+          </button>
+
+        )}
 
       </div>
 
     </div>
+
   );
 }

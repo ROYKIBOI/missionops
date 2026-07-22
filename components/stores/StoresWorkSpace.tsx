@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { getStoresDrivers } from "@/lib/services/missionService";
+import { completeDriver } from "@/lib/actions/missionActions";
 
 import type { ReadinessDriver } from "@/types/mission";
 
@@ -10,6 +11,7 @@ import StoresTaskCard from "./StoresTaskCard";
 import StoresDetailPanel from "./StoresDetailPanel";
 
 export default function StoresWorkspace() {
+  const [, forceUpdate] = useState(0);
 
   const storesDrivers = getStoresDrivers();
 
@@ -18,8 +20,22 @@ export default function StoresWorkspace() {
       storesDrivers[0] ?? null
     );
 
-  return (
+  function issuePart() {
+    if (!selected) return;
 
+    completeDriver(selected.id);
+
+    forceUpdate((v) => v + 1);
+
+    const refreshed = getStoresDrivers();
+
+    const updated =
+      refreshed.find((d) => d.id === selected.id) ?? null;
+
+    setSelected(updated);
+  }
+
+  return (
     <div className="grid gap-8 lg:grid-cols-3">
 
       <div>
@@ -48,11 +64,11 @@ export default function StoresWorkspace() {
 
         <StoresDetailPanel
           driver={selected}
+          onIssuePart={issuePart}
         />
 
       </div>
 
     </div>
-
   );
 }
