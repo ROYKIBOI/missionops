@@ -1,74 +1,125 @@
-import { ReadinessDriver } from "@/types/mission";
+import type { ReadinessDriver } from "@/types/mission";
 
 export const missionDrivers: ReadinessDriver[] = [
-  {
-    id: "HF",
-    title: "HF Operational Check",
-    owner: "Engineering",
-    status: "BLOCKED",
-    readinessWeight: 25,
-    dependsOn: "CONNECTOR",
-    eta: 20,
-    nextAction: "Complete operational HF test",
-    missionImpact: "Aircraft cannot be released.",
-  },
-  {
-  id: "CRS",
 
-  title: "Aircraft Release",
-
-  owner: "Engineering",
-
-  status: "BLOCKED",
-
-  readinessWeight: 20,
-
-  dependsOn: "HF",
-
-  eta: 5,
-
-  nextAction: "Issue Certificate of Release to Service",
-
-  missionImpact: "Mission cannot depart until aircraft is released.",
-},
   {
     id: "CONNECTOR",
+
     title: "HF Connector",
+
     owner: "Stores",
+
     status: "IN_PROGRESS",
+
     readinessWeight: 15,
+
     eta: 10,
-    nextAction: "Issue connector",
-    missionImpact: "Engineering cannot begin HF testing.",
+
+    nextAction: "Issue HF connector to Engineering.",
+
+    missionImpact:
+      "HF operational test cannot begin.",
   },
+
+  {
+    id: "HF",
+
+    title: "HF Operational Check",
+
+    owner: "Engineering",
+
+    status: "BLOCKED",
+
+    readinessWeight: 25,
+
+    dependsOn: "CONNECTOR",
+
+    eta: 20,
+
+    nextAction:
+      "Complete HF operational test.",
+
+    missionImpact:
+      "Aircraft cannot be released.",
+  },
+
+  {
+    id: "CRS",
+
+    title: "Certificate of Release to Service",
+
+    owner: "Engineering",
+
+    status: "BLOCKED",
+
+    dependsOn: "HF",
+
+    readinessWeight: 20,
+
+    eta: 5,
+
+    nextAction:
+      "Issue CRS.",
+
+    missionImpact:
+      "Aircraft cannot depart.",
+  },
+
   {
     id: "FUEL",
+
     title: "Fuel Confirmation",
+
     owner: "Operations",
+
     status: "COMPLETE",
+
     readinessWeight: 10,
+
     eta: 0,
+
     nextAction: "Completed",
-    missionImpact: "Fuel confirmed.",
+
+    missionImpact:
+      "Fuel onboard confirmed.",
   },
+
   {
     id: "CREW",
-    title: "Crew Assigned",
+
+    title: "Crew Assignment",
+
     owner: "Operations",
+
     status: "COMPLETE",
-    readinessWeight: 20,
+
+    readinessWeight: 15,
+
     eta: 0,
+
     nextAction: "Completed",
-    missionImpact: "Crew ready.",
+
+    missionImpact:
+      "Crew available.",
   },
+
   {
     id: "AIRCRAFT",
-    title: "Aircraft Assigned",
+
+    title: "Aircraft Allocation",
+
     owner: "Operations",
+
     status: "COMPLETE",
-    readinessWeight: 30,
+
+    readinessWeight: 15,
+
     eta: 0,
+
     nextAction: "Completed",
-    missionImpact: "Aircraft ready.",
-  },
+
+    missionImpact:
+      "Aircraft allocated.",
+  }
+
 ];

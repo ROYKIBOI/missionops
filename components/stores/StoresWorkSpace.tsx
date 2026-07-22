@@ -2,20 +2,20 @@
 
 import { useState } from "react";
 
-import { getEngineeringDrivers } from "@/lib/services/missionService";
+import { getStoresDrivers } from "@/lib/services/missionService";
 
 import type { ReadinessDriver } from "@/types/mission";
 
-import EngineeringTaskCard from "./EngineeringTaskCard";
-import EngineeringDetailPanel from "./EngineeringDetailPanel";
+import StoresTaskCard from "./StoresTaskCard";
+import StoresDetailPanel from "./StoresDetailPanel";
 
-export default function EngineeringWorkspace() {
+export default function StoresWorkspace() {
 
-  const engineeringDrivers = getEngineeringDrivers();
+  const storesDrivers = getStoresDrivers();
 
   const [selected, setSelected] =
     useState<ReadinessDriver | null>(
-      engineeringDrivers[0] ?? null
+      storesDrivers[0] ?? null
     );
 
   return (
@@ -25,14 +25,14 @@ export default function EngineeringWorkspace() {
       <div>
 
         <h2 className="mb-6 text-2xl font-bold">
-          Engineering Queue
+          Stores Queue
         </h2>
 
         <div className="space-y-4">
 
-          {engineeringDrivers.map((driver) => (
+          {storesDrivers.map((driver) => (
 
-            <EngineeringTaskCard
+            <StoresTaskCard
               key={driver.id}
               driver={driver}
               onSelect={setSelected}
@@ -46,7 +46,7 @@ export default function EngineeringWorkspace() {
 
       <div className="lg:col-span-2">
 
-        <EngineeringDetailPanel
+        <StoresDetailPanel
           driver={selected}
         />
 

@@ -1,7 +1,11 @@
+import type { Mission } from "@/types/mission";
+
 import { missionDrivers } from "@/mock/missionDrivers";
+
 import { calculateMissionReadiness } from "@/lib/engines/readiness";
 
-export const mission = {
+export const mission: Mission = {
+
   id: "MED001",
 
   aircraft: "5Y-ABC",
@@ -20,7 +24,19 @@ export const mission = {
 
   dispatcher: "Flight Operations",
 
-  readiness: calculateMissionReadiness(),
+  lastUpdated: new Date(),
 
   drivers: missionDrivers,
+
+  readiness:
+    calculateMissionReadiness(
+      missionDrivers
+    ),
+
 };
+
+export function updateMissionTimestamp() {
+
+  mission.lastUpdated = new Date();
+
+}

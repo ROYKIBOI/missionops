@@ -6,9 +6,15 @@ export type DriverStatus =
 
 export interface ReadinessDriver {
   id: string;
+
   title: string;
 
-  owner: string;
+  owner:
+    | "Engineering"
+    | "Stores"
+    | "Operations"
+    | "Flight Operations"
+    | "Dispatch";
 
   status: DriverStatus;
 
@@ -21,4 +27,47 @@ export interface ReadinessDriver {
   nextAction: string;
 
   missionImpact: string;
+}
+
+export interface MissionReadiness {
+
+  score: number;
+
+  completedWeight: number;
+
+  totalWeight: number;
+
+  status:
+    | "READY"
+    | "AT_RISK"
+    | "BLOCKED";
+
+}
+
+export interface Mission {
+
+  id: string;
+
+  aircraft: string;
+
+  missionType: string;
+
+  priority: string;
+
+  origin: string;
+
+  destination: string;
+
+  scheduledDeparture: string;
+
+  captain: string;
+
+  dispatcher: string;
+
+  lastUpdated: Date;
+
+  readiness: MissionReadiness;
+
+  drivers: ReadinessDriver[];
+
 }

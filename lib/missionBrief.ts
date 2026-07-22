@@ -1,25 +1,26 @@
-import { missionDrivers } from "@/mock/missionDrivers";
-import { calculateMissionReadiness } from "./engines/readiness";
+import { mission } from "@/lib/mission";
+import { calculateMissionReadiness } from "@/lib/engines/readiness";
 
 export function generateMissionBrief() {
-  const readiness = calculateMissionReadiness();
 
-  const outstanding = missionDrivers.filter(
-    (b) => b.status !== "COMPLETE"
+  const readiness = calculateMissionReadiness(
+    mission.drivers
   );
 
-  if (outstanding.length === 0) {
+  const outstanding = mission.drivers.filter(
+    (driver) => driver.status !== "COMPLETE"
+  );
+
+  if (readiness.status === "READY") {
     return {
       title: "Mission Ready",
       summary:
-        "All mission drivers are complete. Aircraft is ready for release.",
+        "All readiness drivers have been completed. The aircraft is ready for operational release.",
     };
   }
 
-  const first = outstanding[0];
-
   return {
-    title: "Why Not Ready?",
-    summary: `Mission readiness is ${readiness}%. The primary constraint is "${first.title}" owned by ${first.owner}. Next action: ${first.nextAction}. Estimated completion: ${first.eta} minutes.`,
+    title: "Mission At Risk",
+    summary: `${outstanding.length} readiness driver(s) remain outstanding. Completing them will increase overall mission readiness and remove operational blockers.`,
   };
 }

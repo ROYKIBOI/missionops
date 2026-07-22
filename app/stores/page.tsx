@@ -1,29 +1,24 @@
 import AppShell from "@/components/layout/AppShell";
-
-import StoresHeader from "@/components/stores/StoresHeader";
-import StoresKPIs from "@/components/stores/StoresKPIs";
-import StoresRequests from "@/components/stores/StoresRequests";
-import StoresDetailPanel from "@/components/stores/StoresDetailPanel";
+import StoresWorkspace from "@/components/stores/StoresWorkSpace";
 
 export default function StoresPage() {
   return (
     <AppShell>
+      <div className="mb-8">
 
-      <StoresHeader />
+        <h1 className="text-4xl font-bold">
+          Stores Workspace
+        </h1>
 
-      <div className="mt-8">
-        <StoresKPIs />
-      </div>
-
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
-
-        <div className="lg:col-span-2">
-          <StoresRequests />
-        </div>
-
-        <StoresDetailPanel />
+        <p className="mt-3 text-slate-400">
+          Stores controls the availability of aircraft parts, tooling,
+          consumables and logistics. Every completed request contributes
+          directly to mission readiness.
+        </p>
 
       </div>
+
+      <StoresWorkspace />
 
     </AppShell>
   );

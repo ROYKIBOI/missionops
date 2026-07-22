@@ -8,7 +8,8 @@ import NextAction from "@/components/mission/NextAction";
 import MissionChain from "@/components/mission/MissionChain";
 import MissionDrivers from "@/components/mission/MissionDrivers";
 import MissionTimeline from "@/components/mission/MissionTimeline";
-import DepartmentImpact from "@/components/mission/DepartmentImpact";
+import ExecutiveSummary from "@/components/dashboard/ExecutiveSummary";
+import MissionEventLog from "@/components/mission/MissionEventLog";
 
 interface Props {
   params: Promise<{
@@ -21,32 +22,37 @@ export default async function MissionPage({ params }: Props) {
 
   return (
     <AppShell>
+
       {/* Mission Header */}
       <MissionHeader missionId={id} />
 
-      {/* Mission KPIs */}
+      {/* KPI Cards */}
       <div className="mt-8">
         <MissionKPIs />
       </div>
 
       {/* Executive Summary */}
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
+
         <MissionStatus />
 
         <MissionBrief />
 
         <NextAction />
+
+      </div>
+
+      {/* Overall Mission Summary */}
+      <div className="mt-8">
+        <ExecutiveSummary />
       </div>
 
       {/* Mission Dependency Chain */}
       <div className="mt-8">
         <MissionChain />
       </div>
-      <div className="mt-8">
-  <DepartmentImpact />
-</div>
 
-      {/* Mission Readiness Drivers */}
+      {/* Mission Drivers */}
       <div className="mt-8">
         <MissionDrivers />
       </div>
@@ -55,6 +61,12 @@ export default async function MissionPage({ params }: Props) {
       <div className="mt-8">
         <MissionTimeline />
       </div>
+
+      {/* Mission Activity Log */}
+      <div className="mt-8">
+        <MissionEventLog />
+      </div>
+
     </AppShell>
   );
 }
