@@ -8,6 +8,7 @@ import NextAction from "@/components/mission/NextAction";
 import MissionChain from "@/components/mission/MissionChain";
 import MissionDrivers from "@/components/mission/MissionDrivers";
 import MissionTimeline from "@/components/mission/MissionTimeline";
+import DepartmentImpact from "@/components/mission/DepartmentImpact";
 
 interface Props {
   params: Promise<{
@@ -41,6 +42,9 @@ export default async function MissionPage({ params }: Props) {
       <div className="mt-8">
         <MissionChain />
       </div>
+      <div className="mt-8">
+  <DepartmentImpact />
+</div>
 
       {/* Mission Readiness Drivers */}
       <div className="mt-8">
